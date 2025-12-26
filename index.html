@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+
+    <!-- PRIMARY SEO TAGS -->
+    <title>Neon Glow Behind Image | Free AI Backlit Effect Tool (2025)</title>
+    <meta name="description"
+        content="Add stunning neon glow and backlit aura effects behind your photos instantly with AI. 100% free, browser-based, and no sign-up required. Start creating now!">
+    <meta name="keywords"
+        content="neon glow behind image, add glow to photo online, AI background glow generator, backlit image effect, neon border photo editor">
+    <link rel="canonical" href="http://localhost:8080/">
+    <meta name="robots" content="index, follow">
+    <meta name="theme-color" content="#7c3aed">
+
+    <!-- OPEN GRAPH / FACEBOOK / LINKEDIN -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="http://localhost:8080/">
+    <meta property="og:title" content="Neon Glow Behind Image | Free AI Backlit Effect Tool">
+    <meta property="og:description"
+        content="Instantly add glowing neon effects behind any subject using AI. Pure browser-based magic.">
+    <meta property="og:image" content="./images/GlowGenius-1766762337442.png">
+
+    <!-- TWITTER -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="http://localhost:8080/">
+    <meta property="twitter:title" content="Neon Glow Behind Image | Free AI Backlit Effect Tool">
+    <meta property="twitter:description"
+        content="Instantly add glowing neon effects behind any subject using AI. Pure browser-based magic.">
+    <meta property="twitter:image" content="./images/GlowGenius-1766762337442.png">
+
+    <!-- STRUCTURED DATA (JSON-LD) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "SoftwareApplication",
+      "name": "Neon Glow Behind Image",
+      "operatingSystem": "Web Browser",
+      "applicationCategory": "DesignApplication",
+      "description": "A browser-based AI tool that adds neon glow and backlit effects behind image subjects.",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
+      "featureList": "AI Background Removal, Customizable Neon Glow, Real-time Editing, High-Resolution PNG Export"
+    }
+    </script>
+
+    <link rel="icon"
+        href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>✨</text></svg>">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/selfie_segmentation/selfie_segmentation.js"
+        crossorigin="anonymous"></script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet">
+
+    <style>
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: #ffffff;
+            color: #1a1a1a;
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
+
+        .gradient-blob {
+            position: absolute;
+            width: 400px;
+            height: 400px;
+            filter: blur(80px);
+            opacity: 0.15;
+            z-index: -1;
+            border-radius: 50%;
+        }
+
+        .blob-1 {
+            top: -100px;
+            left: -100px;
+            background: #6366f1;
+        }
+
+        .blob-2 {
+            top: 100px;
+            right: -50px;
+            background: #facc15;
+        }
+
+        .blob-3 {
+            bottom: 20%;
+            left: 10%;
+            background: #ec4899;
+        }
+
+        .dashed-border {
+            border: 2px dashed #e2e8f0;
+            transition: all 0.3s ease;
+        }
+
+        .dashed-border:hover,
+        .dashed-border.dragging {
+            border-color: #6366f1;
+            background: #f8fafc;
+        }
+
+        .btn-primary {
+            background: #7c3aed;
+            color: white;
+            padding: 12px 28px;
+            border-radius: 12px;
+            font-weight: 600;
+            transition: transform 0.2s ease, background 0.2s ease;
+        }
+
+        .btn-primary:hover {
+            background: #6d28d9;
+            transform: translateY(-2px);
+        }
+
+        .card {
+            background: white;
+            border: 1px solid #f1f5f9;
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.05);
+            border-radius: 12px;
+            padding: 16px;
+        }
+
+        .step-num {
+            width: 32px;
+            height: 32px;
+            background: #0f172a;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 8px;
+            font-weight: bold;
+            margin-bottom: 12px;
+        }
+
+        canvas {
+            max-width: 100%;
+            height: auto;
+            border-radius: 16px;
+            box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1);
+        }
+
+        .loader {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #7c3aed;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Accessibility Skip Link -->
+    <a href="#editor"
+        class="sr-only focus:not-sr-only absolute top-4 left-4 z-50 bg-violet-600 text-white px-4 py-2 rounded-lg">Skip
+        to Editor</a>
+
+    <header>
+        <!-- Background Blobs -->
+        <div class="gradient-blob blob-1" aria-hidden="true"></div>
+        <div class="gradient-blob blob-2" aria-hidden="true"></div>
+        <div class="gradient-blob blob-3" aria-hidden="true"></div>
+
+        <!-- Navigation -->
+        <nav class="max-w-6xl mx-auto px-6 py-8 flex justify-center items-center">
+            <p class="text-xl font-bold tracking-tight">Neon Glow Behind Image</p>
+        </nav>
+    </header>
+
+    <main class="max-w-4xl mx-auto px-6 pt-16 pb-24 text-center">
+        <!-- Hero Section -->
+        <article class="mb-12">
+            <h1 class="text-5xl md:text-6xl font-extrabold mb-6 leading-tight">
+                Create <span
+                    class="text-transparent bg-clip-text bg-gradient-to-r from-violet-600 to-fuchsia-500">Neon-Glow-Effect</span>
+                Designs Easily
+            </h1>
+            <p class="text-slate-500 text-lg max-w-2xl mx-auto">
+                Add a stunning backlit aura or neon glow behind image subjects in seconds using AI. 100% free with
+                unlimited high-resolution downloads.
+            </p>
+        </article>
+
+        <!-- Editor Section -->
+        <section id="editor" class="mb-12" aria-label="Image Editor">
+            <div id="drop-zone"
+                class="dashed-border rounded-3xl p-12 min-h-[350px] flex flex-col items-center justify-center relative cursor-pointer">
+                <input type="file" id="file-input" class="absolute inset-0 opacity-0 cursor-pointer" accept="image/*"
+                    aria-label="Upload your image">
+
+                <div id="upload-content" class="text-center">
+                    <div class="mb-6 mx-auto w-16 h-16 bg-violet-50 rounded-full flex items-center justify-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none"
+                            stroke="#7c3aed" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                            <polyline points="17 8 12 3 7 8" />
+                            <line x1="12" y1="3" x2="12" y2="15" />
+                        </svg>
+                    </div>
+                    <p class="text-slate-400 mb-6 font-medium">Drag and drop an image here<br><span class="text-xs">or
+                            click to select a file</span></p>
+                    <button class="btn-primary" type="button">Select Image</button>
+                </div>
+
+                <!-- Loading Overlay -->
+                <div id="loading-overlay"
+                    class="hidden absolute inset-0 bg-white/95 backdrop-blur-sm flex flex-col items-center justify-center rounded-3xl z-10">
+                    <div class="loader mb-4"></div>
+                    <p id="loading-text" class="text-violet-600 font-bold">Initializing AI...</p>
+                </div>
+            </div>
+
+            <!-- Preview State -->
+            <div id="preview-area" class="hidden w-full flex flex-col items-center gap-8">
+                <canvas id="output-canvas"></canvas>
+
+                <!-- Inline Controls -->
+                <div id="controls"
+                    class="w-full max-w-md bg-white p-6 rounded-2xl shadow-xl flex flex-col gap-6 text-left border border-slate-100">
+                    <div class="flex justify-between items-center border-b border-slate-50 pb-4">
+                        <h2 class="font-bold text-lg">Glow Settings</h2>
+                        <button id="download-btn"
+                            class="text-violet-600 font-bold hover:text-violet-700 transition-colors">Download
+                            Export</button>
+                    </div>
+
+                    <div class="space-y-6">
+                        <div>
+                            <label class="text-[10px] font-bold text-slate-400 block mb-2 uppercase tracking-wider"
+                                for="glow-color">Glow Color</label>
+                            <input type="color" id="glow-color" value="#7c3aed"
+                                class="w-full h-10 rounded-lg cursor-pointer border-none shadow-sm">
+                        </div>
+                        <div>
+                            <label
+                                class="text-[10px] font-bold text-slate-400 block mb-2 uppercase tracking-wider flex justify-between">
+                                Blur Size <span id="blur-val" class="text-violet-600">40px</span>
+                            </label>
+                            <input type="range" id="glow-blur" min="0" max="150" value="40"
+                                class="w-full h-1.5 bg-slate-100 rounded-lg appearance-none cursor-pointer accent-violet-600">
+                        </div>
+                        <div>
+                            <label
+                                class="text-[10px] font-bold text-slate-400 block mb-2 uppercase tracking-wider flex justify-between">
+                                Intensity <span id="opacity-val" class="text-violet-600">0.8</span>
+                            </label>
+                            <input type="range" id="glow-opacity" min="0" max="100" value="80"
+                                class="w-full h-1.5 bg-slate-100 rounded-lg appearance-none cursor-pointer accent-violet-600">
+                        </div>
+                    </div>
+
+                    <button id="reset-btn"
+                        class="text-xs text-slate-400 hover:text-slate-900 font-medium transition-colors text-center w-full">Start
+                        with another photo</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Benefit Badges -->
+        <section class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-32" aria-label="Features">
+            <div class="card flex items-center gap-4 hover:shadow-md transition-shadow">
+                <div class="w-6 h-6 text-emerald-500 bg-emerald-50 rounded-full flex items-center justify-center p-1">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <polyline points="20 6 9 17 4 12" />
+                    </svg>
+                </div>
+                <div class="text-left">
+                    <p class="text-sm font-bold">100% Free Forever</p>
+                    <p class="text-xs text-slate-400">No hidden costs or trials</p>
+                </div>
+            </div>
+            <div class="card flex items-center gap-4 hover:shadow-md transition-shadow">
+                <div class="w-6 h-6 text-emerald-500 bg-emerald-50 rounded-full flex items-center justify-center p-1">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <polyline points="20 6 9 17 4 12" />
+                    </svg>
+                </div>
+                <div class="text-left">
+                    <p class="text-sm font-bold">Unlimited PNG Exports</p>
+                    <p class="text-xs text-slate-400">High quality with transparency</p>
+                </div>
+            </div>
+            <div class="card flex items-center gap-4 hover:shadow-md transition-shadow">
+                <div class="w-6 h-6 text-emerald-500 bg-emerald-50 rounded-full flex items-center justify-center p-1">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <polyline points="20 6 9 17 4 12" />
+                    </svg>
+                </div>
+                <div class="text-left">
+                    <p class="text-sm font-bold">AI Subject Detection</p>
+                    <p class="text-xs text-slate-400">Professional masking instantly</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Steps Section -->
+        <section class="mb-32" aria-label="How it works">
+            <h2 class="text-3xl font-extrabold mb-16">How to Add Neon Glow Behind Image Subjects</h2>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-12 text-center">
+                <div class="flex flex-col items-center">
+                    <div class="step-num">1</div>
+                    <p class="font-bold text-base mb-2">Upload Photo</p>
+                    <p class="text-xs text-slate-400 leading-relaxed">Select any portrait or object image from your
+                        library.</p>
+                </div>
+                <div class="flex flex-col items-center">
+                    <div class="step-num">2</div>
+                    <p class="font-bold text-base mb-2">AI Processing</p>
+                    <p class="text-xs text-slate-400 leading-relaxed">Our browser-based AI isolates the subject
+                        automatically.</p>
+                </div>
+                <div class="flex flex-col items-center">
+                    <div class="step-num">3</div>
+                    <p class="font-bold text-base mb-2">Adjust Glow</p>
+                    <p class="text-xs text-slate-400 leading-relaxed">Customize the neon glow color, opacity, and blur
+                        size.</p>
+                </div>
+                <div class="flex flex-col items-center">
+                    <div class="step-num">4</div>
+                    <p class="font-bold text-base mb-2">Download PNG</p>
+                    <p class="text-xs text-slate-400 leading-relaxed">Export your stunning neon design in high-res PNG
+                        format.</p>
+                </div>
+            </div>
+
+            <a href="#editor"
+                class="mt-16 inline-flex items-center gap-3 bg-slate-900 text-white px-10 py-5 rounded-2xl font-bold hover:bg-slate-800 hover:scale-105 active:scale-95 transition-all">
+                Get Started for Free <span>&rarr;</span>
+            </a>
+        </section>
+
+        <!-- Featured Section -->
+        <section class="mb-32">
+            <p class="text-[10px] font-bold text-slate-400 uppercase tracking-[0.2em] mb-6">Inspiration Gallery</p>
+            <h2 class="text-4xl font-extrabold mb-16 max-w-2xl mx-auto leading-tight">Create Eye-Catching Neon-Glow Post
+                for Social Media</h2>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+                <div class="group overflow-hidden rounded-2xl shadow-sm hover:shadow-xl transition-all duration-500">
+                    <img src="./images/GlowGenius-1766762337442.png" alt="Neon glow behind classic mustang car"
+                        class="w-full h-auto group-hover:scale-105 transition-transform duration-700">
+                </div>
+                <div class="group overflow-hidden rounded-2xl shadow-sm hover:shadow-xl transition-all duration-500">
+                    <img src="./images/GlowGenius-1766762298699.png" alt="Glowing backlit aura behind a whale tail"
+                        class="w-full h-auto group-hover:scale-105 transition-transform duration-700">
+                </div>
+                <div class="group overflow-hidden rounded-2xl shadow-sm hover:shadow-xl transition-all duration-500">
+                    <img src="./images/GlowGenius-1766762311616.png" alt="Neon outline effect on an athlete"
+                        class="w-full h-auto group-hover:scale-105 transition-transform duration-700">
+                </div>
+                <div class="group overflow-hidden rounded-2xl shadow-sm hover:shadow-xl transition-all duration-500">
+                    <img src="./images/GlowGenius-1766762365333.png" alt="Backlit halo effect on a luxury yacht"
+                        class="w-full h-auto group-hover:scale-105 transition-transform duration-700">
+                </div>
+            </div>
+        </section>
+
+        <!-- SEO Content / FAQ Section -->
+        <article class="max-w-3xl mx-auto text-left py-16 border-t border-slate-100">
+            <h2 class="text-3xl font-extrabold mb-8 text-center italic">Frequently Asked Questions</h2>
+            <div class="space-y-8">
+                <div>
+                    <h3 class="font-bold text-lg mb-2">How do I add a glow effect behind an image?</h3>
+                    <p class="text-slate-500 text-sm">To add a glow behind an image subject, upload your photo to our AI
+                        tool. Our engine automatically removes the background and allows you to insert a customizable
+                        neon glow or backlit aura between the original background and the subject.</p>
+                </div>
+                <div>
+                    <h3 class="font-bold text-lg mb-2">Is the Neon Glow tool free to use?</h3>
+                    <p class="text-slate-500 text-sm">Yes, Neon Glow Behind Image is 100% free. You can upload unlimited
+                        photos, apply effects, and download high-resolution exports without any hidden costs or
+                        accounts.</p>
+                </div>
+                <div>
+                    <h3 class="font-bold text-lg mb-2">Does my data stay safe?</h3>
+                    <p class="text-slate-500 text-sm">Absolutely. All processing happens locally in your browser using
+                        MediaPipe AI. Your images are never uploaded to our servers, ensuring total privacy.</p>
+                </div>
+            </div>
+        </article>
+    </main>
+
+    <footer class="py-12 border-t border-slate-50 text-center">
+        <p class="text-sm text-slate-400 font-medium">
+            &copy; 2025 Neon Glow Behind Image. Powered by browser-based AI AI.
+        </p>
+    </footer>
+
+    <script>
+        // DOM Elements
+        const fileInput = document.getElementById('file-input');
+        const dropZone = document.getElementById('drop-zone');
+        const uploadContent = document.getElementById('upload-content');
+        const previewArea = document.getElementById('preview-area');
+        const canvas = document.getElementById('output-canvas');
+        const ctx = canvas.getContext('2d');
+        const loadingOverlay = document.getElementById('loading-overlay');
+        const loadingText = document.getElementById('loading-text');
+
+        const glowColorInput = document.getElementById('glow-color');
+        const glowBlurInput = document.getElementById('glow-blur');
+        const glowOpacityInput = document.getElementById('glow-opacity');
+        const downloadBtn = document.getElementById('download-btn');
+        const resetBtn = document.getElementById('reset-btn');
+
+        // State
+        let originalImage = null;
+        let subjectImage = null;
+        let selfieSegmentation = null;
+        let resolveSegmentation = null;
+
+        // Initialize Engine
+        async function initEngine() {
+            if (selfieSegmentation) return;
+            try {
+                loadingText.innerText = "Initializing AI Engine...";
+                selfieSegmentation = new SelfieSegmentation({
+                    locateFile: (file) => `https://cdn.jsdelivr.net/npm/@mediapipe/selfie_segmentation/${file}`
+                });
+                selfieSegmentation.setOptions({ modelSelection: 1, selfieMode: false });
+                selfieSegmentation.onResults((results) => {
+                    if (resolveSegmentation) {
+                        const outCanvas = document.createElement('canvas');
+                        outCanvas.width = results.image.width;
+                        outCanvas.height = results.image.height;
+                        const outCtx = outCanvas.getContext('2d');
+                        outCtx.drawImage(results.image, 0, 0);
+                        outCtx.globalCompositeOperation = 'destination-in';
+                        outCtx.drawImage(results.segmentationMask, 0, 0);
+                        outCtx.globalCompositeOperation = 'source-over';
+
+                        const img = new Image();
+                        img.onload = () => {
+                            resolveSegmentation(img);
+                            resolveSegmentation = null;
+                        };
+                        img.src = outCanvas.toDataURL();
+                    }
+                });
+                const dummy = document.createElement('canvas');
+                dummy.width = 1; dummy.height = 1;
+                await selfieSegmentation.send({ image: dummy });
+                loadingText.innerText = "Engine Ready";
+            } catch (err) {
+                console.error(err);
+                throw new Error("WASM Engine Error. Please check your connection.");
+            }
+        }
+
+        // Processing
+        async function handleFile(file) {
+            if (!file || !file.type.startsWith('image/')) return;
+            loadingOverlay.classList.remove('hidden');
+            uploadContent.classList.add('hidden');
+
+            try {
+                const url = URL.createObjectURL(file);
+                const rawImg = await loadImage(url);
+                originalImage = resizeImageIfNeeded(rawImg, 1280);
+
+                await initEngine();
+                loadingText.innerText = "AI Processing...";
+
+                subjectImage = await new Promise((resolve, reject) => {
+                    resolveSegmentation = resolve;
+                    selfieSegmentation.send({ image: originalImage }).catch(reject);
+                    setTimeout(() => { if (resolveSegmentation) reject(new Error("Timeout")); }, 30000);
+                });
+
+                canvas.width = originalImage.width;
+                canvas.height = originalImage.height;
+
+                previewArea.classList.remove('hidden');
+                dropZone.classList.add('hidden');
+                loadingOverlay.classList.add('hidden');
+                render();
+            } catch (err) {
+                console.error(err);
+                alert("Error: " + err.message);
+                resetAll();
+            }
+        }
+
+        function render() {
+            if (!originalImage || !subjectImage) return;
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            ctx.drawImage(originalImage, 0, 0);
+
+            ctx.save();
+            ctx.globalAlpha = glowOpacityInput.value / 100;
+            ctx.shadowColor = glowColorInput.value;
+            ctx.shadowBlur = parseInt(glowBlurInput.value);
+            ctx.drawImage(subjectImage, 0, 0);
+            if (parseInt(glowBlurInput.value) > 60) ctx.drawImage(subjectImage, 0, 0);
+            ctx.restore();
+
+            ctx.drawImage(subjectImage, 0, 0);
+            updateUI();
+        }
+
+        function updateUI() {
+            document.getElementById('blur-val').innerText = glowBlurInput.value + 'px';
+            document.getElementById('opacity-val').innerText = (glowOpacityInput.value / 100).toFixed(1);
+        }
+
+        function resetAll() {
+            previewArea.classList.add('hidden');
+            dropZone.classList.remove('hidden');
+            uploadContent.classList.remove('hidden');
+            loadingOverlay.classList.add('hidden');
+            originalImage = null;
+            subjectImage = null;
+            fileInput.value = '';
+        }
+
+        // Helpers
+        function loadImage(url) {
+            return new Promise((r, j) => { const i = new Image(); i.onload = () => r(i); i.onerror = j; i.src = url; });
+        }
+
+        function resizeImageIfNeeded(img, max) {
+            if (img.width <= max && img.height <= max) return img;
+            const ratio = Math.min(max / img.width, max / img.height);
+            const w = img.width * ratio, h = img.height * ratio;
+            const c = document.createElement('canvas');
+            c.width = w; c.height = h;
+            c.getContext('2d').drawImage(img, 0, 0, w, h);
+            const n = new Image(); n.src = c.toDataURL(); return n;
+        }
+
+        // Events
+        fileInput.addEventListener('change', e => handleFile(e.target.files[0]));
+        dropZone.addEventListener('dragover', e => { e.preventDefault(); dropZone.classList.add('dragging'); });
+        dropZone.addEventListener('dragleave', () => dropZone.classList.remove('dragging'));
+        dropZone.addEventListener('drop', e => { e.preventDefault(); dropZone.classList.remove('dragging'); handleFile(e.dataTransfer.files[0]); });
+
+        [glowColorInput, glowBlurInput, glowOpacityInput].forEach(i => i.addEventListener('input', render));
+        resetBtn.addEventListener('click', resetAll);
+        downloadBtn.addEventListener('click', () => {
+            const link = document.createElement('a');
+            link.download = `NeonGlow-${Date.now()}.png`;
+            link.href = canvas.toDataURL();
+            link.click();
+        });
+    </script>
+</body>
+
+</html>
